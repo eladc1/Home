@@ -1,0 +1,96 @@
+<alerts></alerts>
+
+<div class="row" id="iconCards" ng-controller="iconCard-ctrl" >
+	<div class="col-lg-3 col-md-6 col-xs-12" ng-repeat="card in cards">
+		<rd-widget>
+			<rd-widget-body>
+				<div class="widget-icon  pull-left {{::card.color}}">
+					<i class="fa {{::card.icon}}"></i>
+				</div>
+				<div class="title">{{card.number}}</div>
+				<div class="comment">{{::card.text}}</div>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-6" ng-controller="expensesCtrl">
+		<rd-widget>
+      		<rd-widget-header icon="fa-tasks" title="Servers" class="form-inline">
+				<input type="text" placeholder="קטגוריה" class="form-control input-sm" ng-model="exForm.search.category"  />
+				<input type="text" placeholder="פריט" class="form-control input-sm" ng-model="exForm.search.what"  />
+				<input type="text" placeholder="איפה" class="form-control input-sm" ng-model="exForm.search.store"  />
+      		</rd-widget-header>
+      		<rd-widget-body classes="medium no-padding" dir="rtl">
+				<div class="table-responsive">
+					<table class="table">
+						<tbody>
+							<thead><tr>
+								<th ng-click="exForm.sortType = 'category'; exForm.sortReverse 	= !exForm.sortReverse">קטגוריה</th>
+								<th ng-click="exForm.sortType = 'store'; 	exForm.sortReverse 	= !exForm.sortReverse">חנות</th>
+								<th ng-click="exForm.sortType = 'date'; 	exForm.sortReverse	= !exForm.sortReverse">תאריך</th>
+								<th ng-click="exForm.sortType = 'what'; 	exForm.sortReverse 	= !exForm.sortReverse">מה קנינו</th>
+								<th ng-click="exForm.sortType = 'how_much'; exForm.sortReverse 	= !exForm.sortReverse">{{ expenses | filter:exForm.search | orderBy:exForm.sortType:exForm.sortReverse | sumByColumn: 'how_much' }}</th>
+							</tr></thead>
+							<tr ng-repeat="exp in  expenses | filter:exForm.search | orderBy:exForm.sortType:exForm.sortReverse ">
+								<td>{{::exp.category}}</td><td>{{::exp.store}}</td><td>{{::exp.date | dateToISO | date: 'dd.MM.yy'}}</td><td>{{::exp.what}}</td><td>{{::exp.how_much}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+	<div class="col-lg-6">
+		<rd-widget>
+			<rd-widget-header icon="fa-users" title="Users">
+				<input type="text" placeholder="Search" class="form-control input-sm" />
+			</rd-widget-header>
+			<rd-widget-body classes="medium no-padding">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr><th class="text-center">ID</th><th>Username</th><th>Role</th><th>Account</th></tr>
+						</thead>
+						<tbody>
+							<tr><td class="text-center">1</td><td>Joe Bloggs</td><td>Super Admin</td><td>AZ23045</td></tr>
+							<tr><td class="text-center">2</td><td>Timothy Hernandez</td><td>Admin</td><td>AU24783</td></tr>
+							<tr><td class="text-center">3</td><td>Joe Bickham</td><td>User</td><td>AM23781</td></tr>
+						</tbody>
+					</table>
+        		</div>
+			</rd-widget-body>
+		<rd-widget>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-6">
+   		<rd-widget>
+   			<rd-widget-header icon="fa-plus" title="Extras">
+   				<button class="btn btn-sm btn-info">Button</button>
+   			</rd-widget-header>
+   			<rd-widget-body>
+				<div class="message">
+					This is a standard message which will also work the ".no-padding" class, I can also <span class="error">be an error message!</span>
+				</div>
+				<hr />
+				<div class="message">
+					<a href="http://angular-ui.github.io/bootstrap/" target="_blank">UI Bootstrap</a> is included, so you can use <a href="#" tooltip="I'm a tooltip!">tooltips</a> and all of the other native Bootstrap JS components!
+				</div>
+   			</rd-widget-body>
+   		</rd-widget>
+	</div>
+	<div class="col-lg-6">
+		<rd-widget>
+			<rd-widget-header icon="fa-cog fa-spin" title="Loading Directive">
+				<a href="http://tobiasahlin.com/spinkit/" target="_blank">SpinKit</a>
+			</rd-widget-header>
+			<rd-widget-body>
+				<rd-loading></rd-loading>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+</div>

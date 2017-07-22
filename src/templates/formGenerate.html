@@ -1,0 +1,124 @@
+<form method="post" class="navbar-form" id="main_form" novalidate>
+    <div class="form-group">
+        <label for="date">תאריך</label>
+        <input type="date" name="date" id="date" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="category">קטגוריה</label>
+        <input ng-model="form.category" type="text" name="category" id="category" list="cat_list" class="form-control" autofocus>
+        <datalist id="cat_list">
+            <option ng-repeat="field in categories" value="{{::field}}">
+        </datalist>
+    </div>
+    <div class="form-group">
+        <label for="store">איפה קניתי</label>
+        <input ng-model="form.store" type="text" id="store" name="store" class="form-control">
+    </div><br>
+    <div class="form-group" id="what_form-group">
+        <label for="what">מה קניתי</label>
+        <input ng-model="form.what" type="text" id="what" name="what" class="form-control">
+    </div>
+
+
+    <div class="form-group">
+        <label for="how_much">כמה עלה</label>
+        <input ng-model="form.how_much" type="number" id="how_much" name="how_much" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="who">מי</label>
+        <input ng-model="form.who" type="text" name="who" id="who" list="who_list" class="form-control">
+        <datalist id="who_list">
+            <option ng-repeat="field in whoPay" value="{{::field}}">
+        </datalist>
+    </div>
+    <div class="form-group">
+        <label for="how">איך</label>
+        <input ng-model="form.how"  type="text" name="how" id="how" list="how_list" class="form-control">
+        <datalist id="how_list">
+
+            <option ng-repeat="field in howPay" value="{{::field}}">
+        </datalist>
+    </div><br>
+    <div class="form-group" id="const_form-group">
+        <label for="constant">הוצאה חודשית קבועה?</label>
+        <input ng-model="form.constant"  type="checkbox" id="constant" name="constant" class="form-control">
+    </div>
+    <input type="hidden" name="expenses_honey">
+
+
+    <button class="btn btn-primary" ng-submit="sendForm()" value="שליחה" id="submit">
+</form>
+
+<!--
+<form name="myForm" class="form-horizontal" role="form" ng-submit="submitForm()">
+    <div ng-repeat="field in entity.fields">
+        <ng-form name="form">
+            &lt;!&ndash; TEXT FIELDS &ndash;&gt;
+            <div ng-if="field.type=='text'" class="form-group">
+                <label class="col-sm-2 control-label">{{field.label}}</label>
+                <div class="col-sm-6">
+                    <input type="{{ field.type }}" dynamic-name="field.name" id="{{field.name}}" data-ng-model="field.data"  class="form-control" required/>
+                    &lt;!&ndash;<span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.required">Required!</span>.&ndash;&gt;
+                    <span  data-ng-show=" {{'form.'+field.name+'.$dirty && form.'+field.name+'.$error.required'}}">Required!</span>
+                </div>
+            </div>
+
+            &lt;!&ndash; EMAIL FIELDS &ndash;&gt;
+            <div ng-if="field.type=='email'" class="form-group">
+                <label class="col-sm-2 control-label">{{field.label}}</label>
+                <div class="col-sm-6">
+                    <input type="{{ field.type }}" dynamic-name="field.name" data-ng-model="field.data" class="form-control" required/>
+                    <span data-ng-show=" {{'form.'+field.name+'.$dirty && form.'+field.name+'.$error.required'}}">Required!</span>
+                    <span data-ng-show=" {{'form.'+field.name+'.$dirty && form.'+field.name+'.$error.email'}}">Not email!</span>
+                </div>
+            </div>
+
+            &lt;!&ndash; PASSWORD FIELDS &ndash;&gt;
+            <div ng-if="field.type=='password'" class="form-group" >
+                <label class="col-sm-2 control-label">{{field.label}}</label>
+                <div class="col-sm-6">
+                    <input type="{{ field.type }}" dynamic-name="field.name" data-ng-model="field.data" ng-minlength={{field.min}} ng-maxlength={{field.max}} class="form-control" required/>
+                    <span data-ng-show=" {{'form.'+field.name+'.$dirty && form.'+field.name+'.$error.required'}}">Required!</span>
+                    <span data-ng-show=" {{'!form.'+field.name+'.required && (form.'+field.name+'.$error.minlength || form.'+field.name+'.$error.maxlength)' }}">Passwords must be between 8 and 20 characters.</span>
+                </div>
+            </div>
+
+            &lt;!&ndash; SELECT FIELDS &ndash;&gt;
+            <div ng-if="field.type=='select'" class="form-group" >
+                <label class="col-sm-2 control-label">{{field.label}}</label>
+                <div class="col-sm-6">
+                    <select data-ng-model="field.data" ng-options="option.name for option in field.options" class="form-control" required/>
+                </div>
+            </div>
+
+            &lt;!&ndash; RADIO FIELDS &ndash;&gt;
+            <div ng-if="field.type=='radio'" class="form-group">
+                <label class="col-sm-2 control-label">{{field.label}}</label>
+                <div class="col-sm-6">
+
+                    <div class="checkbox" ng-repeat="option in field.options" >
+                        <label>
+                            <input type="radio" data-ng-model="field.data"  name="taskGroup"  id="{{option.name}}" value="{{option.id}}">{{option.name}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            &lt;!&ndash; CHECKBOX FIELDS &ndash;&gt;
+            <div ng-if="field.type=='checkbox'" class="form-group" >
+                <label class="col-sm-2 control-label">{{field.label}}</label>
+                <div class="col-sm-6">
+                    <div class="checkbox" ng-repeat="option in field.options" >
+                        <label>
+                            <input type="checkbox" data-ng-model="option.data"  name="taskGroup"  id="{{option.name}}" value="{{option.id}}" >{{option.name}}
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+
+        </ng-form>
+    </div>
+</form>
+-->
