@@ -53,7 +53,5 @@ Icon
 
 #vscode
 /.vscode
-ignore.js
 bin/config.json
-expenses.json
-
+/local  
