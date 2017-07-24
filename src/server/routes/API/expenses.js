@@ -14,6 +14,40 @@ router.get('/', function(req, res) {
     });
 });
 
+router.post('/', function(req, res){
+    res.set({ 'content-type': 'application/json; charset=utf-8' });
+
+    //TODO auth
+    provider.postNewExpenses(  req.body , function ( err, result ) {
+        if (err) console.error(err);
+        res.json( result );
+        res.end();
+    });
+});
+
+router.put('/', function(req, res){
+    res.set({ 'content-type': 'application/json; charset=utf-8' });
+
+    //TODO auth
+    provider.updateExpenses(  req.body , function ( err, result ) {
+        if (err) console.error(err);
+        res.json( result );
+        res.end();
+    });
+});
+
+router.delete('/:id', function(req, res){
+    res.set({ 'content-type': 'application/json; charset=utf-8' });
+
+    //TODO auth
+    provider.deleteExpenses(  req.params.id , function ( err, result ) {
+        if (err) console.error(err);
+        res.json( result );
+        res.end();
+    });
+});
+
+
 router.get('/month/:month?/:year?', function(req, res) {
     res.set({ 'content-type': 'application/json; charset=utf-8' });
 

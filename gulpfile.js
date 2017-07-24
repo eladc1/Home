@@ -111,7 +111,7 @@ gulp.task('webserver', function() {
     connect.server({
         root: 'dist',
         livereload: true,
-        port: 8888
+        port: 3000
     });
 });
 
@@ -121,30 +121,9 @@ gulp.task('livereload', function() {
         .pipe(connect.reload());
 });
 
-/*
-gulp.task('node', function (cb) {
-    exec('node src/server/server.js', function (err, stdout, stderr) {
-        console.log(stdout);
-        console.log(stderr);
-        cb(err);
-    });
-});
-
-
-
-var exec = require('child_process').exec;
-
-gulp.task('node', function (callback) {
-    exec('node server/server.js', function (err, stdout, stderr) {
-        console.log(stdout);
-        console.log(stderr);
-        callback(err);
-    });
-});
- */
 /**
  * Gulp tasks
  */
 gulp.task('build', ['minify', 'build-assets', 'build-custom']);
 gulp.task('default', ['build', 'webserver', 'livereload', 'watch']);
-gulp.task('elad', [ 'elad-build-custom', 'webserver', 'livereload', 'elad-watch']);
+gulp.task('elad', [ 'elad-build-custom', 'start', 'livereload', 'elad-watch']);

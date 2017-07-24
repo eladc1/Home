@@ -21,7 +21,9 @@
 				<input type="text" placeholder="קטגוריה" class="form-control input-sm" ng-model="exForm.search.category"  />
 				<input type="text" placeholder="פריט" class="form-control input-sm" ng-model="exForm.search.what"  />
 				<input type="text" placeholder="איפה" class="form-control input-sm" ng-model="exForm.search.store"  />
-      		</rd-widget-header>
+			
+   				<button class="btn btn-sm btn-info" ng-click="openExpensesModal()">הוסף הוצאה</button>  
+			</rd-widget-header>
       		<rd-widget-body classes="medium no-padding" dir="rtl">
 				<div class="table-responsive">
 					<table class="table">
@@ -34,7 +36,9 @@
 								<th ng-click="exForm.sortType = 'how_much'; exForm.sortReverse 	= !exForm.sortReverse">{{ expenses | filter:exForm.search | orderBy:exForm.sortType:exForm.sortReverse | sumByColumn: 'how_much' }}</th>
 							</tr></thead>
 							<tr ng-repeat="exp in  expenses | filter:exForm.search | orderBy:exForm.sortType:exForm.sortReverse ">
-								<td>{{::exp.category}}</td><td>{{::exp.store}}</td><td>{{::exp.date | dateToISO | date: 'dd.MM.yy'}}</td><td>{{::exp.what}}</td><td>{{::exp.how_much}}</td>
+								<td>{{::exp.category}}</td><td>{{::exp.store}}</td><td>{{::exp.date | dateToISO | date: 'dd.MM.yy'}}</td>
+								<td>{{::exp.what}}</td><td>{{::exp.how_much}}</td>
+								<td ng-click="esitExpensesModal(exp)">U</td><td ng-click="deleteExpensesModal(exp._id)">X</td>
 							</tr>
 						</tbody>
 					</table>

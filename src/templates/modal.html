@@ -1,0 +1,88 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">{{::title}}</h3>
+</div>
+<div class="modal-body" id="modal-body">
+
+
+    <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
+        <div class="form-group">
+            <div class="form-inline">
+                <!-- Date -->
+                <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+                    <label>תאריך</label>
+                    <input type="date" name="name" class="form-control" ng-model="exp.date" required>
+                    <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
+                </div>
+
+                <!-- Categories -->
+                <div class="form-group" ng-class="{ 'has-error' : userForm.category.$invalid && !userForm.category.$pristine }">
+                    <label>קטגוריה</label>
+                    <select name="category" class="form-control" ng-model="exp.category" required>
+                <option ng-repeat="cat in categories" value="{{::cat}}">{{::cat}}</option>
+            </select>
+                    <p ng-show="userForm.category.$invalid && !userForm.category.$pristine" class="help-block">You name is required.</p>
+                </div>
+
+                <!-- Store -->
+                <div class="form-group" ng-class="{ 'has-error' : userForm.store.$invalid && !userForm.store.$pristine }">
+                    <label>איפה קניתי</label>
+                    <input type="text" name="store" class="form-control" ng-model="exp.store" required>
+                    <p ng-show="userForm.store.$invalid && !userForm.store.$pristine" class="help-block">You name is required.</p>
+                </div>
+            </div>
+        </div>
+        <!-- What -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.what.$invalid && !userForm.what.$pristine }">
+            <label>מה קניתי</label>
+            <input type="text" name="what" class="form-control" ng-model="exp.what" required>
+            <p ng-show="userForm.what.$invalid && !userForm.what.$pristine" class="help-block">You name is required.</p>
+        </div>
+        <div class="form-group">
+            <div class="form-inline">
+                <!-- how_much -->
+                <div class="form-group" ng-class="{ 'has-error' : userForm.how_much.$invalid && !userForm.how_much.$pristine }">
+                    <label>כמה עלה</label>
+                    <input type="number" name="how_much" class="form-control" ng-model="exp.how_much" required>
+                    <p ng-show="userForm.how_much.$invalid && !userForm.how_much.$pristine" class="help-block">You name is required.</p>
+                </div>
+
+                <!-- Who -->
+                <div class="form-group" ng-class="{ 'has-error' : userForm.who.$invalid && !userForm.who.$pristine }">
+                    <label>מי</label>
+                    <select name="who" class="form-control" ng-model="exp.who" required>
+                <option ng-repeat="who in whoList" value="{{::who}}">{{::who}}</option>
+            </select>
+                    <p ng-show="userForm.who.$invalid && !userForm.who.$pristine" class="help-block">You name is required.</p>
+                </div>
+
+                <!-- How -->
+                <div class="form-group" ng-class="{ 'has-error' : userForm.how.$invalid && !userForm.how.$pristine }">
+                    <label>איך</label>
+                    <select name="how" class="form-control" ng-model="exp.how" required>
+                <option ng-repeat="how in howList" value="{{::how}}">{{::how}}</option>
+            </select>
+                    <p ng-show="userForm.how.$invalid && !userForm.how.$pristine" class="help-block">You name is required.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- USERNAME
+        <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
+            <label>Username</label>
+            <input type="text" name="username" class="form-control" ng-model="user.username" ng-minlength="3" ng-maxlength="8">
+            <p ng-show="userForm.username.$error.minlength" class="help-block">Username is too short.</p>
+            <p ng-show="userForm.username.$error.maxlength" class="help-block">Username is too long.</p>
+        </div> -->
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+
+
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-succsess" type="button" ng-click="ok()">אישור</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">בטל</button>
+</div>

@@ -1,8 +1,8 @@
 const bodyParser = require('body-parser');
-const exModel = require('./../models/expensesModel');
+const incModel = require('./../models/incomesModel');
 
-function setExModelObjByParams(params){
-    return new exModel({
+function setIncModelObjByParams(params){
+    return new incModel({
         date: Date.parse( params.date),
         category: params.category,
         store: params.store,
@@ -14,15 +14,15 @@ function setExModelObjByParams(params){
     });
 }
 
-function getAllExpenses(callback) {
-    exModel.find({}, callback);
+function getAllIncomes(callback) {
+    incModel.find({}, callback);
 }
 
-function getExpensesByMonthAndYear(month, year, callback) {
+function getIncomesByMonthAndYear(month, year, callback) {
     const lastDayOfTheMonth = new Date(year, month, 0).getDate();
     //IDKY, but new Date(Y,M,D) bring the next month in the calander, probably becuse its starts with 0.
     month--;
-    exModel.find({
+    incModel.find({
         "date": {
             "$gte": new Date(year, month, 1),
             "$lte": new Date(year, month, lastDayOfTheMonth)
@@ -30,27 +30,27 @@ function getExpensesByMonthAndYear(month, year, callback) {
     }, callback);
 }
 
-function postNewExpenses(params, callback) {
-    var newExpenses =  setExModelObjByParams(params);
-    newExpenses.save(callback);
+function postNewIncome(params, callback) {
+    var newIncome =  setIncModelObjByParams(params);
+    newIncome.save(callback);
 }
 
-function updateExpenses(params, callback) {
-    var updateExpenses = setExModelObjByParams(params);
-    updateExpenses._id = params._id;
-    exModel.findByIdAndUpdate(params._id, updateExpenses , callback);
+function updateIncome(params, callback) {
+    var updateIncome = setIncModelObjByParams(params);
+    updateIncome._id = params._id;
+    incModel.findByIdAndUpdate(params._id, updateIncome , callback);
 }
 
-function deleteExpenses(id, callback){
-    exModel.remove({_id:id}, callback);
+function deleteIncome(id, callback){
+    incModel.remove(id, callback);
 }
 
 module.exports = {
-    getAllExpenses: getAllExpenses,
-    getExpensesByMonthAndYear: getExpensesByMonthAndYear,
-    postNewExpenses: postNewExpenses,
-    updateExpenses :updateExpenses,
-    deleteExpenses:deleteExpenses
+    getAllIncomes: getAllIncomes,
+    getIncomesByMonthAndYear: getIncomesByMonthAndYear,
+    postNewIncome: postNewIncome,
+    updateIncome :updateIncome,
+    deleteIncome:deleteIncome
 };
 
 /*
